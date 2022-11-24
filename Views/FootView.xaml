@@ -1,0 +1,908 @@
+﻿<UserControl
+    x:Class="UITemplate.Views.FootView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:UITemplate.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Control.Resources>
+        <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
+            <!--  焦点视觉风格  -->
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle
+                                        Margin="2"
+                                        SnapsToDevicePixels="True"
+                                        Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                        StrokeDashArray="1 2"
+                                        StrokeThickness="1" />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid
+                            x:Name="templateRoot"
+                            Background="Transparent"
+                            SnapsToDevicePixels="True">
+                            <Border
+                                x:Name="border"
+                                BorderBrush="Red"
+                                BorderThickness="0"
+                                CornerRadius="10"
+                                SnapsToDevicePixels="True" />
+                            <Border x:Name="bd2" />
+                            <ContentPresenter
+                                x:Name="contentPresenter"
+                                Grid.Column="1"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Focusable="False"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="True">
+                                <Setter Property="FocusVisualStyle">
+                                    <Setter.Value>
+                                        <Style>
+                                            <Setter Property="Control.Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate>
+                                                        <Rectangle
+                                                            Margin="14,0,0,0"
+                                                            SnapsToDevicePixels="True"
+                                                            Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                                            StrokeDashArray="1 2"
+                                                            StrokeThickness="1" />
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Padding" Value="4,-1,0,0" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#ffffff" />
+                                <Setter TargetName="border" Property="Opacity" Value="0.15" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="#ffffff" />
+                                <Setter TargetName="border" Property="Opacity" Value="0.15" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}" />
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="MinHeight" Value="50" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10"
+                            SnapsToDevicePixels="true">
+                            <ContentPresenter
+                                x:Name="contentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Focusable="False"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#8CEDCB" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Control.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="270" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Canvas Grid.ColumnSpan="2">
+            <Canvas.Background>
+                <LinearGradientBrush StartPoint="0.5 0" EndPoint="0.5 1">
+                    <GradientStop Offset="0" Color="#232882" />
+                    <GradientStop Offset="1" Color="#580083" />
+                </LinearGradientBrush>
+            </Canvas.Background>
+        </Canvas>
+        <!--  左侧栏背景图  -->
+        <Border Opacity="0.3">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/left_backimages.png" />
+            </Border.Background>
+        </Border>
+        <!--  左侧栏  -->
+        <StackPanel>
+            <TextBlock
+                Margin="40,20"
+                FontSize="45"
+                FontWeight="Bold"
+                Foreground="White"
+                Text="CRICKET" />
+            <ListBox
+                Background="Transparent"
+                BorderThickness="0"
+                ItemsSource="{Binding MenuModels}"
+                SelectedItem="{Binding MenuModel}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <Grid>
+                                        <Border Name="border" />
+                                        <ContentPresenter />
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="Transparent" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton
+                            Margin="30,10,30,0"
+                            VerticalContentAlignment="Center"
+                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}, Path=DataContext.SelectedCommand, Mode=TwoWay}"
+                            CommandParameter="{Binding}"
+                            Style="{StaticResource RadioButtonStyle}">
+                            <RadioButton.IsChecked>
+                                <Binding
+                                    Mode="TwoWay"
+                                    Path="IsSelected"
+                                    RelativeSource="{RelativeSource AncestorType=ListBoxItem}" />
+                            </RadioButton.IsChecked>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Margin="10,0,0,0"
+                                    FontFamily="/Fonts1/#iconfont"
+                                    FontSize="28"
+                                    Foreground="White"
+                                    Text="{Binding IconFont}" />
+                                <TextBlock
+                                    Margin="15,0,0,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="{Binding Title}" />
+
+                            </StackPanel>
+                        </RadioButton>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <!--  主体  -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="130" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <StackPanel
+                Margin="0,0,50,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <Button
+                    Width="40"
+                    Height="40"
+                    Background="Transparent"
+                    BorderBrush="White"
+                    Content="&#xe628;"
+                    FontFamily="/Fonts1/#iconfont"
+                    FontSize="30"
+                    Foreground="White"
+                    Style="{StaticResource ButtonStyle1}" />
+                <Button
+                    Width="100"
+                    Height="40"
+                    Margin="10,0,0,0"
+                    Background="Transparent"
+                    BorderBrush="White"
+                    Content="SelectEdtion"
+                    Foreground="White"
+                    Style="{StaticResource ButtonStyle1}" />
+                <Image
+                    Width="40"
+                    Height="40"
+                    Margin="10,0,0,0"
+                    Source="/Images/tx.jpeg"
+                    Stretch="Fill">
+                    <Image.Clip>
+                        <EllipseGeometry
+                            Center="20,20"
+                            RadiusX="20"
+                            RadiusY="20" />
+                    </Image.Clip>
+                </Image>
+            </StackPanel>
+
+            <Grid Grid.Row="1" Margin="25,0,25,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="90" />
+                </Grid.ColumnDefinitions>
+
+                <Border Background="White" CornerRadius="15">
+                    <StackPanel Margin="15,25,0,0">
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            FontSize="15"
+                            FontWeight="Bold"
+                            Foreground="#FF8743"
+                            Text="MatchDelayed By Rain" />
+                        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                            <Image Source="/Images/t1.png">
+                                <Image.Clip>
+                                    <EllipseGeometry
+                                        Center="10,10"
+                                        RadiusX="10"
+                                        RadiusY="10" />
+                                </Image.Clip>
+                            </Image>
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Center"
+                                FontWeight="Bold"
+                                Text="SA" />
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="DarkGray"
+                                Text="29/2(7.3/50 ov)" />
+                        </StackPanel>
+                        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                            <Image Source="/Images/t2.png">
+                                <Image.Clip>
+                                    <EllipseGeometry
+                                        Center="10,10"
+                                        RadiusX="10"
+                                        RadiusY="10" />
+                                </Image.Clip>
+                            </Image>
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Center"
+                                FontWeight="Bold"
+                                Text="WI" />
+
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border
+                    Grid.Column="2"
+                    Background="White"
+                    CornerRadius="15">
+                    <StackPanel Margin="15,25,0,0">
+                        <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
+                            <Border
+                                Width="10"
+                                Height="10"
+                                Background="#58E73B"
+                                CornerRadius="10" />
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                FontSize="15"
+                                FontWeight="Bold"
+                                Foreground="#FF8743"
+                                Text="Live- Updates only" />
+                        </StackPanel>
+                        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                            <Image Source="/Images/t1.png">
+                                <Image.Clip>
+                                    <EllipseGeometry
+                                        Center="10,10"
+                                        RadiusX="10"
+                                        RadiusY="10" />
+                                </Image.Clip>
+                            </Image>
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Center"
+                                FontWeight="Bold"
+                                Text="IND-A" />
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="DarkGray"
+                                Text="                                  291/8" />
+                        </StackPanel>
+                        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                            <Image Source="/Images/t2.png">
+                                <Image.Clip>
+                                    <EllipseGeometry
+                                        Center="10,10"
+                                        RadiusX="10"
+                                        RadiusY="10" />
+                                </Image.Clip>
+                            </Image>
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Center"
+                                FontWeight="Bold"
+                                Text="SL-A" />
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="DarkGray"
+                                Text="   137/2)35/50 ov, Target292" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border
+                    Grid.Column="4"
+                    Background="White"
+                    CornerRadius="15">
+                    <StackPanel Margin="15,25,0,0">
+                        <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
+                            <Border
+                                Width="10"
+                                Height="10"
+                                Background="#58E73B"
+                                CornerRadius="10" />
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                FontSize="15"
+                                FontWeight="Bold"
+                                Foreground="#FF8743"
+                                Text="Live- Updates only" />
+                        </StackPanel>
+                        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                            <Image Source="/Images/t1.png">
+                                <Image.Clip>
+                                    <EllipseGeometry
+                                        Center="10,10"
+                                        RadiusX="10"
+                                        RadiusY="10" />
+                                </Image.Clip>
+                            </Image>
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Center"
+                                FontWeight="Bold"
+                                Text="SA" />
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="DarkGray"
+                                Text="                                  233/8" />
+                        </StackPanel>
+                        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                            <Image Source="/Images/t2.png">
+                                <Image.Clip>
+                                    <EllipseGeometry
+                                        Center="10,10"
+                                        RadiusX="10"
+                                        RadiusY="10" />
+                                </Image.Clip>
+                            </Image>
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Center"
+                                FontWeight="Bold"
+                                Text="WI" />
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Foreground="DarkGray"
+                                Text="    876(28 ov,Target 209" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border
+                    Grid.Column="1"
+                    Margin="10,0,10,0"
+                    Background="#6DEBFF"
+                    CornerRadius="15">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock
+                            Margin="5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="WORLD"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Margin="5,0,5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="CUP"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Margin="5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="#B6F5FF"
+                            Text="Watch Top"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Margin="5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="#B6F5FF"
+                            Text="Event"
+                            TextWrapping="Wrap" />
+
+                    </StackPanel>
+                </Border>
+                <Border
+                    Grid.Column="3"
+                    Margin="10,0,10,0"
+                    Background="#FF132D"
+                    CornerRadius="15">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock
+                            Margin="5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="ICC"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Margin="5,0,5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="WOMENS"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Margin="5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="CHAMP"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+                <Border
+                    Grid.Column="5"
+                    Margin="10,0,10,0"
+                    Background="#FCDF1F"
+                    CornerRadius="15">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock
+                            Margin="5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Country"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Margin="5,0,5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="DIV"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Margin="5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="1"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="2*" />
+                    </Grid.RowDefinitions>
+                    <Image
+                        Width="250"
+                        Margin="-70,0,0,0"
+                        HorizontalAlignment="Left"
+                        Panel.ZIndex="1"
+                        Source="/Images/t4.png" />
+                    <Border
+                        Margin="25"
+                        Background="White"
+                        CornerRadius="10"
+                        Opacity="0.1" />
+                    <Border>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock
+                                FontSize="18"
+                                Foreground="White"
+                                Text="I have decided to move on' - Yuvraj Singh" />
+                            <TextBlock
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Text="Announces international, IPL retirement" />
+                            <TextBlock
+                                Width="380"
+                                FontSize="15"
+                                Foreground="DarkGray"
+                                Text="Allrounder, who last played for India in June 2017, has decided to hang up his boots after a..."
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Width="250"
+                            Margin="0,-20,0,0"
+                            VerticalAlignment="Top"
+                            Source="/Images/t5.png" />
+                        <Image
+                            Grid.Column="1"
+                            Width="250"
+                            Margin="0,-20,0,0"
+                            VerticalAlignment="Top"
+                            Source="/Images/t6.png" />
+                        <Border
+                            Margin="25"
+                            Background="White"
+                            CornerRadius="10"
+                            Opacity="0.1" />
+                        <Border
+                            Grid.Column="1"
+                            Margin="25"
+                            Background="White"
+                            CornerRadius="10"
+                            Opacity="0.1" />
+
+                        <Border>
+                            <StackPanel
+                                Margin="0,30,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                                <TextBlock
+                                    Width="230"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="Kohli tells India fans not to boo Smith"
+                                    TextWrapping="Wrap" />
+                                <TextBlock
+                                    Width="230"
+                                    Margin="0,5,0,0"
+                                    FontSize="12"
+                                    Foreground="White"
+                                    Text="India captain makes intervention from the middle after 'Cheater!' chants directed at Steven Smith"
+                                    TextWrapping="Wrap" />
+                                <TextBlock Margin="0,20,0,0" Foreground="White">
+                                    <Hyperlink
+                                        FontSize="18"
+                                        FontWeight="Bold"
+                                        Foreground="#E0D1EA"
+                                        NavigateUri="https://www.google.com">
+                                        READ FULL STORY
+                                    </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="1">
+                            <StackPanel
+                                Margin="0,30,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                                <TextBlock
+                                    Width="230"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="The curious story of the bails that lost their zing"
+                                    TextWrapping="Wrap" />
+                                <TextBlock
+                                    Width="230"
+                                    Margin="0,5,0,0"
+                                    FontSize="12"
+                                    Foreground="White"
+                                    Text="Jasprit Bumrah to David Warner was the fifth instance at this World Cup of a batsman surviving ..."
+                                    TextWrapping="Wrap" />
+                                <TextBlock Margin="0,20,0,0" Foreground="White">
+                                    <Hyperlink
+                                        FontSize="18"
+                                        FontWeight="Bold"
+                                        Foreground="#E0D1EA"
+                                        NavigateUri="https://www.google.com">
+                                        READ FULL STORY
+                                    </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid Margin="50,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="2.5*" />
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Margin="0,10,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Text="Time is running out! Predict who will win the World Cup"
+                                TextWrapping="Wrap" />
+                            <Button
+                                Grid.Column="1"
+                                Width="120"
+                                Height="50"
+                                VerticalAlignment="Center"
+                                Background="#1EC9FF"
+                                Content="PLAY NOW"
+                                FontSize="15"
+                                FontWeight="Bold"
+                                Foreground="White">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border
+                                                        x:Name="border"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="25"
+                                                        SnapsToDevicePixels="true">
+                                                        <ContentPresenter
+                                                            x:Name="contentPresenter"
+                                                            Margin="{TemplateBinding Padding}"
+                                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                            Focusable="False"
+                                                            RecognizesAccessKey="True"
+                                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="true">
+                                                            <Setter TargetName="border" Property="BorderBrush" Value="#8CEDCB" />
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Grid>
+                        <UniformGrid
+                            Grid.Row="1"
+                            Margin="0,0,0,50"
+                            Rows="3">
+                            <Grid Margin="0,5,0,10">
+                                <Border
+                                    Background="White"
+                                    CornerRadius="10"
+                                    Opacity="0.1" />
+                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                    <Image
+                                        Height="70"
+                                        Margin="20"
+                                        HorizontalAlignment="Left"
+                                        Source="/Images/t7.png">
+                                        <Image.Clip>
+                                            <EllipseGeometry
+                                                Center="35,35"
+                                                RadiusX="35"
+                                                RadiusY="35" />
+                                        </Image.Clip>
+                                    </Image>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock
+                                            FontSize="20"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="Ausralia" />
+                                        <Border
+                                            Width="250"
+                                            Height="20"
+                                            Margin="0,15,0,0"
+                                            Background="#ffffff"
+                                            CornerRadius="10"
+                                            Opacity="0.2">
+                                            <Border
+                                                Width="200"
+                                                HorizontalAlignment="Left"
+                                                CornerRadius="10">
+                                                <Border.Background>
+                                                    <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.5,1">
+                                                        <GradientStop Offset="0" Color="#9490BE" />
+                                                        <GradientStop Offset="1" Color="#580083" />
+                                                    </LinearGradientBrush>
+                                                </Border.Background>
+                                            </Border>
+                                        </Border>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Margin="0,10,0,10">
+                                <Border
+                                    Background="White"
+                                    CornerRadius="10"
+                                    Opacity="0.12" />
+                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                    <Image
+                                        Height="70"
+                                        Margin="20"
+                                        HorizontalAlignment="Left"
+                                        Source="/Images/t8.png">
+                                        <Image.Clip>
+                                            <EllipseGeometry
+                                                Center="35,35"
+                                                RadiusX="35"
+                                                RadiusY="35" />
+                                        </Image.Clip>
+                                    </Image>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock
+                                            FontSize="20"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="Ausralia" />
+                                        <Border
+                                            Width="250"
+                                            Height="20"
+                                            Margin="0,15,0,0"
+                                            Background="#ffffff"
+                                            CornerRadius="10"
+                                            Opacity="0.2">
+                                            <Border
+                                                Width="200"
+                                                HorizontalAlignment="Left"
+                                                CornerRadius="10">
+                                                <Border.Background>
+                                                    <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.5,1">
+                                                        <GradientStop Offset="0" Color="#9490BE" />
+                                                        <GradientStop Offset="1" Color="#580083" />
+                                                    </LinearGradientBrush>
+                                                </Border.Background>
+                                            </Border>
+                                        </Border>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Margin="0,10,0,5">
+                                <Border
+                                    Background="White"
+                                    CornerRadius="10"
+                                    Opacity="0.12" />
+                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                    <Image
+                                        Height="70"
+                                        Margin="20"
+                                        HorizontalAlignment="Left"
+                                        Source="/Images/t9.png">
+                                        <Image.Clip>
+                                            <EllipseGeometry
+                                                Center="35,35"
+                                                RadiusX="35"
+                                                RadiusY="35" />
+                                        </Image.Clip>
+                                    </Image>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock
+                                            FontSize="20"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="Ausralia" />
+                                        <Border
+                                            Width="250"
+                                            Height="20"
+                                            Margin="0,15,0,0"
+                                            Background="#ffffff"
+                                            CornerRadius="10"
+                                            Opacity="0.2">
+                                            <Border
+                                                Width="200"
+                                                HorizontalAlignment="Left"
+                                                CornerRadius="10">
+                                                <Border.Background>
+                                                    <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.5,1">
+                                                        <GradientStop Offset="0" Color="#9490BE" />
+                                                        <GradientStop Offset="1" Color="#580083" />
+                                                    </LinearGradientBrush>
+                                                </Border.Background>
+                                            </Border>
+                                        </Border>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </UniformGrid>
+                    </Grid>
+                    <Border
+                        Margin="25"
+                        Background="White"
+                        CornerRadius="10"
+                        Opacity="0.1" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
